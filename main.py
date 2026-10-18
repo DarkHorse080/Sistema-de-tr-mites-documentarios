@@ -12,20 +12,21 @@ def mostrar_menu():
 def main():
     while True:
         mostrar_menu()
-        opcion = input("Seleccione una opción (1-5): ")
+        opcion = input("Seleccione una opción (1-5): ").strip()
 
-        if opcion == "1":
-            print("\n[Módulo de Registro]") # Falta hacer
-        elif opcion == "2":
-            print("\n[Módulo de Consulta]") # Falta hacer
-        elif opcion == "3":
-            print("\n[Módulo de Ordenamiento]") # Falta hacer
-        elif opcion == "4":
-            print("\n[Módulo de Listado]") # Falta hacer
-        elif opcion == "5":
-            print("\n¡Saliendo del sistema Mesa de Partes Digital!")
-            break
-        else:
-            print("\nOpción no válida. Ingrese un número entre 1 y 5.")
+        match opcion:
+            case "1":
+                print("\n[Módulo de Registro]")
+            case "2":
+                print("\n[Módulo de Consulta]")
+            case "3":
+                print("\n[Módulo de Ordenamiento]")
+            case "4":
+                print("\n[Módulo de Listado]")
+            case "5":
+                print("\n¡Saliendo del sistema Mesa de Partes Digital!")
+                break
+            case _:
+                print("\nOpción no válida. Ingrese un número entre 1 y 5.")
 
 main()

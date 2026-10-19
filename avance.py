@@ -38,16 +38,8 @@ def formulario_solicitud():
             continue
 
         print("\nDatos registrados correctamente")
-        return {
-            "persona": persona,
-            "apellido_paterno": apellido_paterno,
-            "apellido_materno": apellido_materno,
-            "nombres": nombres,
-            "razon_social": razon_social,
-            "documento": documento,
-            "correo": correo,
-            "telefono": telefono,
-        }
+        return [persona, apellido_paterno, apellido_materno, nombres, razon_social, documento, correo, telefono]
+''
 def direccion():
     while True:
         print("\n elija el tipo de via:")
@@ -81,19 +73,28 @@ def direccion():
         departamento = input("Departamento: ").strip()
         provincia = input("Provincia: ").strip()
         distrito = input("Distrito: ").strip()
-        return {
-            "tipo_via": tipo_via,
-            "tipo_zona": tipo,
-            "nombre_zona": nombre_zona,
-            "referencia": referencia,
-            "departamento": departamento,
-            "provincia": provincia,
-            "distrito": distrito
-        }
+        return [tipo_via, tipo, nombre_zona, referencia, departamento, provincia, distrito]
+
 
 datos_personales = formulario_solicitud()
 datos_direccion = direccion()
 
 print("\n--- REGISTRO COMPLETADO ---")
-print("Datos personales:", datos_personales)
-print("Dirección:", datos_direccion)
+print("\nDatos personales:")
+print("Tipo de persona :", datos_personales[0])
+print("Apellido paterno:", datos_personales[1])
+print("Apellido materno:", datos_personales[2])
+print("Nombres         :", datos_personales[3])
+print("Razón social    :", datos_personales[4])
+print("Documento       :", datos_personales[5])
+print("Correo          :", datos_personales[6])
+print("Teléfono        :", datos_personales[7])
+
+print("\nDirección:")
+print("Tipo de vía     :", datos_direccion[0])
+print("Tipo de zona    :", datos_direccion[1])
+print("Nombre de zona  :", datos_direccion[2])
+print("Referencia      :", datos_direccion[3])
+print("Departamento    :", datos_direccion[4])
+print("Provincia       :", datos_direccion[5])
+print("Distrito        :", datos_direccion[6])

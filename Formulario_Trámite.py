@@ -87,20 +87,20 @@ def Direccion():
         print("5. Carretera")
         print("6. Prolongacion")
 
-        Direccion = int(input("Tipo de via: ").strip())
+        Direccion = input("Tipo de via: ").strip()
 
         match Direccion:
-            case 1:
+            case "1":
                 tipo_via = "Avenida"
-            case 2:
+            case "2":
                 tipo_via = "Jiron"
-            case 3:
+            case "3":
                 tipo_via = "Calle"
-            case 4:
+            case "4":
                 tipo_via = "Pasaje"
-            case 5:
+            case "5":
                 tipo_via = "Carretera"
-            case 6:
+            case "6":
                 tipo_via = "Prolongacion"
             case _:
                 print("Tipo de via no valida, intente nuevamente.")
@@ -121,32 +121,32 @@ def Direccion():
         print("11. Fundo")
         print("12. Otros")
         
-        Direccion2 = int(input("Ingrese el tipo de zona: ").strip())
+        Direccion2 = input("Ingrese el tipo de zona: ").strip()
 
         match Direccion2:
-                    case 1:
+                    case "1":
                         tipo_zona = "Urbanización"
-                    case 2:
+                    case "2":
                         tipo_zona = "Pueblo Joven"
-                    case 3:
+                    case "3":
                         tipo_zona = "Unidad Vecinal"
-                    case 4:
+                    case "4":
                         tipo_zona = "Conjunto Habitacional"
-                    case 5:
+                    case "5":
                         tipo_zona = "Cooperativa"
-                    case 6:
+                    case "6":
                         tipo_zona = "Residencial"
-                    case 7:
+                    case "7":
                         tipo_zona = "Zona Industrial"
-                    case 8:
+                    case "8":
                         tipo_zona = "Centro Poblado"
-                    case 9:
+                    case "9":
                         tipo_zona = "Asociación"
-                    case 10:
+                    case "10":
                         tipo_zona = "Grupo"
-                    case 11:
+                    case "11":
                         tipo_zona = "Fundo"
-                    case 12:
+                    case "12":
                         tipo_zona = "Otros"
                     case _:
                         print("Tipo de zona no valida, intente nuevamente.")
@@ -196,7 +196,9 @@ def Fecha():
     return fecha
 
 
-def Mostrar_trámite(resumen_pedido,autoridad,datos_personales,datos_direccion,fundamentacion_pedido,documentos_adjuntados,fecha):
+def Mostrar_trámite(codigo,resumen_pedido,autoridad,datos_personales,datos_direccion,fundamentacion_pedido,documentos_adjuntados,fecha):
+    print("------DATOS REGISTRADOS DEL TRÁMITE------")
+    print(f"\nCodigo:{codigo}")
     print("\nI. RESUMEN DE SU PEDIDO")
     print(resumen_pedido)
 
@@ -238,8 +240,11 @@ def Mostrar_trámite(resumen_pedido,autoridad,datos_personales,datos_direccion,f
     print(documentos_adjuntados)
 
     print(f"\nFecha: {fecha}")
+    print(f"\nEstado: Enviado")
+
 
 def Formulario_Unico_de_Trámite():
+    print("------FORMULARIO ÚNICO DE TRÁMITE------")
     i=Resumen_del_pedido()
     ii=Autoridad_a_la_que_se_dirige()
     iii=Datos_del_solicitante()
@@ -248,6 +253,6 @@ def Formulario_Unico_de_Trámite():
     vi=Documentos_adjuntados()
     f=Fecha()
     tramite=[i,ii,iii,iv,v,vi,f]
-    Mostrar_trámite(i,ii,iii,iv,v,vi,f)
+    
 
     return tramite

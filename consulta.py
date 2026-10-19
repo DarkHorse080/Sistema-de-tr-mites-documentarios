@@ -1,6 +1,5 @@
 
 from pathlib import Path
-from Operaciones import convertir_a_lista
 
 
 def consultar_tramite():
@@ -12,38 +11,84 @@ def consultar_tramite():
         print("Debe ingresar un codigo.")
         return
 
-    ruta = Path("Trámites.txt")
+    carpeta = Path(__file__).resolve().parent
+    ruta = carpeta / "Tr\u00e1mites.txt"
 
     if not ruta.exists():
-        print("Todavia no hay tramites registrados.")
+        ruta = carpeta / "Tramites.txt"
+
+    if not ruta.exists():
+        print("No se encontro el archivo de tramites.")
+        print("Crea el archivo al registrar el primer tramite.")
         return
 
-    encontrado = False
-
-    with open(ruta, "r", encoding="utf-8") as archivo:
+    with open(ruta, "r", encoding="utf-8-sig") as archivo:
         for linea in archivo:
             if not linea.strip():
                 continue
 
-            datos = convertir_a_lista(linea.strip())
+            datos = linea.strip().split(";")
 
-            if datos[0] == codigo:
-                print("\n--- TRAMITE ENCONTRADO ---")
-                print("Codigo:", datos[0])
-                print("Resumen del pedido:", datos[1])
-                print("Autoridad:", datos[2])
-                print("Datos del solicitante:", datos[3:10])
-                print("Direccion:", datos[10:18])
-                print("Fundamentacion:", datos[18])
-                print("Documentos adjuntos:", datos[19])
-                print("Fecha:", datos[20])
-                print("Estado:", datos[21])
+            if datos[0].strip() != codigo:
+                continue
 
-                encontrado = True
-                break
+            print("\n========== TRAMITE ENCONTRADO ==========")
+            print("Codigo:", datos[0])
+            print("Resumen del pedido:", datos[1])
+            print("Autoridad:", datos[2])
 
-    if not encontrado:
-        print("No se encontro el tramite.")
+            if len(datos) == 22:
+                print("\n--- DATOS DEL SOLICITANTE ---")
+                print("Tipo de persona:", datos[3])
+                print("Apellido paterno:", datos[4])
+                print("Apellido materno:", datos[5])
+                print("Nombres:", datos[6])
+                print("DNI:", datos[7])
+                print("Correo:", datos[8])
+                print("Telefono:", datos[9])
+                inicio = 10
+
+            elif len(datos) == 20:
+                print("\n--- DATOS DE LA EMPRESA ---")
+                print("Tipo de persona:", datos[3])
+                print("Razon social:", datos[4])
+                print("RUC:", datos[5])
+                print("Correo:", datos[6])
+                print("Telefono:", datos[7])
+                inicio = 8
+
+            else:
+                print("\nNo se reconoce la estructura del registro.")
+                print("Cantidad de campos encontrados:", len(datos))
+                print("Registro completo:", datos)
+                return
+
+            nombres_direccion = [
+                "Departamento",
+                "Provincia",
+                "Distrito",
+                "Tipo de via",
+                "Nombre de via",
+                "Numero",
+                "Interior",
+                "Referencia"
+            ]
+
+            print("\n--- DIRECCION ---")
+            for i, nombre in enumerate(nombres_direccion):
+                print(nombre + ":", datos[inicio + i])
+
+            inicio_final = inicio + 8
+
+            print("\n--- DETALLES DEL TRAMITE ---")
+            print("Fundamentacion:", datos[inicio_final])
+            print("Documentos adjuntos:", datos[inicio_final + 1])
+            print("Fecha:", datos[inicio_final + 2])
+            print("Estado:", datos[inicio_final + 3])
+            print("========================================")
+            return
+
+    print("\nNo se encontro un tramite con ese codigo.")
 
 
 if __name__ == "__main__":

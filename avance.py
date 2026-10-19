@@ -1,28 +1,56 @@
 # Formulario de Solicitudes
-
 def formulario_solicitud():
     print("REGISTRO DE SOLICITUD")
-
     while True:
-        apellido_paterno = input("\nIngrese su apellido paterno: ").strip()
-        apellido_materno = input("Ingrese su apellido materno: ").strip()
-        nombres = input("Ingrese sus nombres: ").strip()
-        razon_social = input("Razon social: ").strip()
-        documento = input("Ingrese su DNI: ").strip()
+        print("\nTipo de persona")
+        print("1. Persona Natural")
+        print("2. Persona Juridica")
+        tipo_persona = input("Elija una opción (1 o 2): ").strip()
 
-        if apellido_paterno == "" or apellido_materno == "" or nombres == "" or razon_social == "" or documento == "":
+        if tipo_persona == "1":
+            persona = "Natural"
+            apellido_paterno = input("\nIngrese su apellido paterno: ").strip()
+            apellido_materno = input("Ingrese su apellido materno: ").strip()
+            nombres = input("Ingrese sus nombres: ").strip()
+            razon_social = ""
+        elif tipo_persona == "2":
+            persona = "Juridica"
+            apellido_paterno = ""
+            apellido_materno = ""
+            nombres = ""
+            razon_social = input("\nIngrese la Razón Social: ").strip()
+        else:
+            print("Operacion no valida, intetelo nuevamente")
+            continue
+
+        documento = input("Ingrese su DNI/RUC: ").strip()
+        correo = input("Ingrese su correo electronico: ").strip()
+        telefono = input("Ingrese su teléfono: ").strip()
+
+        if (not documento or not correo or not telefono or
+                (persona == "Natural" and not all((apellido_paterno, apellido_materno, nombres))) or
+                (persona == "Juridica" and not razon_social)):
             print("Los campos no deben estar vacíos, complete los campos nuevamente.")
-            continue 
+            continue
 
-        if len(documento) != 8 or not documento.isdigit():
+        if persona == "Natural" and (len(documento) != 8 or not documento.isdigit()):
             print("Dni no valido, intente nuevamente.")
-            continue 
-        print("\nDatos registrados correctamente")
-        
+            continue
 
+        print("\nDatos registrados correctamente")
+        return {
+            "persona": persona,
+            "apellido_paterno": apellido_paterno,
+            "apellido_materno": apellido_materno,
+            "nombres": nombres,
+            "razon_social": razon_social,
+            "documento": documento,
+            "correo": correo,
+            "telefono": telefono,
+        }
 def direccion():
     while True:
-        print("\nEscriba el tipo de via:")
+        print("\n elija el tipo de via:")
         print("1. Avenida")
         print("2. Jiron")
         print("3. Calle")
@@ -34,62 +62,34 @@ def direccion():
 
         if Direccion == "1":
             tipo_via = "Avenida"
-            tipo = input("Ingrese el tipo de zona: ").strip()
-            nombre_zona = input("Ingrese nombre de la zona: ").strip()
-            referencia = input("Referencia: ").strip()
-            departamento = input("Departamento: ").strip()
-            provincia = input("Provincia: ").strip()
-            distrito = input("Distrito: ").strip()
-
         elif Direccion == "2":
             tipo_via = "Jiron"
-            tipo = input("Ingrese el tipo de zona: ").strip()
-            nombre_zona = input("Ingrese nombre de la zona: ").strip()
-            referencia = input("Referencia: ").strip()
-            departamento = input("Departamento: ").strip()
-            provincia = input("Provincia: ").strip()
-            distrito = input("Distrito: ").strip()
-
         elif Direccion == "3":
             tipo_via = "Calle"
-            tipo = input("Ingrese el tipo de zona: ").strip()
-            nombre_zona = input("Ingrese nombre de la zona: ").strip()
-            referencia = input("Referencia: ").strip()
-            departamento = input("Departamento: ").strip()
-            provincia = input("Provincia: ").strip()
-            distrito = input("Distrito: ").strip()
-
         elif Direccion == "4":
             tipo_via = "Pasaje"
-            tipo = input("Ingrese el tipo de zona: ").strip()
-            nombre_zona = input("Ingrese nombre de la zona: ").strip()
-            referencia = input("Referencia: ").strip()
-            departamento = input("Departamento: ").strip()
-            provincia = input("Provincia: ").strip()
-            distrito = input("Distrito: ").strip()
-
         elif Direccion == "5":
             tipo_via = "Carretera"
-            tipo = input("Ingrese el tipo de zona: ").strip()
-            nombre_zona = input("Ingrese nombre de la zona: ").strip()
-            referencia = input("Referencia: ").strip()
-            departamento = input("Departamento: ").strip()
-            provincia = input("Provincia: ").strip()
-            distrito = input("Distrito: ").strip()
-
         elif Direccion == "6":
             tipo_via = "Prolongacion"
-            tipo = input("Ingrese el tipo de zona: ").strip()
-            nombre_zona = input("Ingrese nombre de la zona: ").strip()
-            referencia = input("Referencia: ").strip()
-            departamento = input("Departamento: ").strip()
-            provincia = input("Provincia: ").strip()
-            distrito = input("Distrito: ").strip()
-
         else:
             print("Tipo de via no valida, intente nuevamente.")
             continue  
-
+        tipo = input("Ingrese el tipo de zona: ").strip()
+        nombre_zona = input("Ingrese nombre de la zona: ").strip()
+        referencia = input("Referencia: ").strip()
+        departamento = input("Departamento: ").strip()
+        provincia = input("Provincia: ").strip()
+        distrito = input("Distrito: ").strip()
+        return {
+            "tipo_via": tipo_via,
+            "tipo_zona": tipo,
+            "nombre_zona": nombre_zona,
+            "referencia": referencia,
+            "departamento": departamento,
+            "provincia": provincia,
+            "distrito": distrito
+        }
 
 datos_personales = formulario_solicitud()
 datos_direccion = direccion()

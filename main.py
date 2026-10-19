@@ -1,3 +1,5 @@
+from Formulario_Trámite import Formulario_Unico_de_Trámite
+from Registro_tramite import Registrar_Tramite
 def mostrar_menu():
     print("\n" + "="*45)
     print("  MESA DE PARTES DIGITAL - I.E. 1.4.8")
@@ -17,6 +19,7 @@ def main():
         match opcion:
             case "1":
                 print("\n[Módulo de Registro]")
+                Registrar_Tramite(Formulario_Unico_de_Trámite())
             case "2":
                 print("\n[Módulo de Consulta]")
             case "3":

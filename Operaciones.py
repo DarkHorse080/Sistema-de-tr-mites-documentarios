@@ -46,18 +46,34 @@ def ordenar_tramites_por_codigo():
     if len(tramites) == 0:
         print("\nNo hay trámites registrados para ordenar.")
         return
-    
-    # Método de la Burbuja
+
+    print("\n--- Opciones de Ordenamiento ---")
+    print("1. Ascendente (Menor a Mayor)")
+    print("2. Descendente (Mayor a Menor)")
+    opcion_ord = input("Seleccione una opción (1-2): ").strip()
+
     n = len(tramites)
     for i in range(n):
         for j in range(0, n - i - 1):
-            if tramites[j][0] > tramites[j + 1][0]:
-                temporal = tramites[j]
-                tramites[j] = tramites[j + 1]
-                tramites[j + 1] = temporal
+            num1 = int(tramites[j][0][5:])
+            num2 = int(tramites[j + 1][0][5:])
+
+            if opcion_ord == "1":
+                if num1 > num2:
+                    temporal = tramites[j]
+                    tramites[j] = tramites[j + 1]
+                    tramites[j + 1] = temporal
+            elif opcion_ord == "2":
+                if num1 < num2:
+                    temporal = tramites[j]
+                    tramites[j] = tramites[j + 1]
+                    tramites[j + 1] = temporal
 
     print("\n" + "="*50)
-    print("   TRÁMITES ORDENADOS ASCENDENTEMENTE POR CÓDIGO")
+    if opcion_ord == "2":
+        print("   TRÁMITES ORDENADOS DESCENDENTEMENTE POR CÓDIGO")
+    else:
+        print("   TRÁMITES ORDENADOS ASCENDENTEMENTE POR CÓDIGO")
     print("="*50)
     for t in tramites:
         print(f"Código: {t[0]} | Datos: {t}")

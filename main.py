@@ -1,6 +1,7 @@
 from consulta import consultar_tramite
 from Formulario_Trámite import Formulario_Unico_de_Trámite
 from Registro_tramite import Registrar_Tramite
+from Operaciones import mostrar_todos_los_tramites, ordenar_tramites_por_codigo
 def mostrar_menu():
     print("\n" + "="*45)
     print("  MESA DE PARTES DIGITAL - I.E. 1.4.8")
@@ -26,8 +27,10 @@ def main():
                 consultar_tramite()
             case "3":
                 print("\n[Módulo de Ordenamiento]")
+                ordenar_tramites_por_codigo()
             case "4":
                 print("\n[Módulo de Listado]")
+                mostrar_todos_los_tramites()
             case "5":
                 print("\n¡Saliendo del sistema Mesa de Partes Digital!")
                 break

@@ -1,3 +1,4 @@
+from consulta import consultar_tramite
 from Formulario_Trámite import Formulario_Unico_de_Trámite
 from Registro_tramite import Registrar_Tramite
 def mostrar_menu():
@@ -22,6 +23,7 @@ def main():
                 Registrar_Tramite(Formulario_Unico_de_Trámite())
             case "2":
                 print("\n[Módulo de Consulta]")
+                consultar_tramite()
             case "3":
                 print("\n[Módulo de Ordenamiento]")
             case "4":

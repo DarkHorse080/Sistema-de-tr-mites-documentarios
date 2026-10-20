@@ -12,7 +12,7 @@ def obtener_todos_los_tramites():
     if not ruta.exists():
         return []
 
-    tramites = open(ruta, "r", encoding="utf-8")
+    tramites = open(ruta, "r", encoding="utf-8-sig")
     lineas = tramites.readlines()
     tramites.close()
 
@@ -69,12 +69,20 @@ def ordenar_tramites_por_codigo():
                     tramites[j] = tramites[j + 1]
                     tramites[j + 1] = temporal
 
-    print("\n" + "="*50)
+    print("\n" + "=" * 50)
     if opcion_ord == "2":
         print("   TRÁMITES ORDENADOS DESCENDENTEMENTE POR CÓDIGO")
     else:
         print("   TRÁMITES ORDENADOS ASCENDENTEMENTE POR CÓDIGO")
-    print("="*50)
+    print("=" * 50)
+
     for t in tramites:
-        print(f"Código: {t[0]} | Datos: {t}")
-    print("="*50)
+        print(f"\nCódigo: {t[0]}")
+        print("-" * 35)
+
+        for i, dato in enumerate(t):
+            print(f"  Dato {i + 1}: {dato}")
+
+        print("-" * 35)
+
+    print("=" * 50)

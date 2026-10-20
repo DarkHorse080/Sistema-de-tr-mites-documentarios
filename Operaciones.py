@@ -1,4 +1,3 @@
-
 from pathlib import Path
 
 
@@ -16,10 +15,9 @@ def obtener_todos_los_tramites():
     if not ruta.exists():
         return []
 
-    tramites = open(ruta, "r", encoding="utf-8-sig")
-    lineas = tramites.readlines()
-    tramites.close()
-
+    with open(ruta, "r", encoding="utf-8-sig") as tramites:
+        lineas = tramites.readlines()
+    
     lista_tramites = []
 
     for linea in lineas:
@@ -32,20 +30,67 @@ def obtener_todos_los_tramites():
     return lista_tramites
 
 
+def ajustar_texto(texto, ancho):
+    texto = str(texto)
+    if len(texto) > ancho:
+        return texto[: ancho - 3] + "..."
+    return texto.ljust(ancho)
+
+
 def mostrar_todos_los_tramites():
     tramites = obtener_todos_los_tramites()
 
     if len(tramites) == 0:
         print("\nNo hay trámites registrados en el sistema.")
     else:
-        print("\n" + "=" * 50)
-        print("         LISTADO DE EXPEDIENTES Y TRÁMITES")
-        print("=" * 50)
+        print("\n" + "=" * 146)
+        print(" "*56 + "LISTADO DE EXPEDIENTES Y TRÁMITES")
+        print("=" * 146)
 
+        separador = "  |  "
+        
+        anchos = [10, 15, 31, 25, 15, 10, 10]
+        
+        encabezados = [
+            "CÓDIGO",
+            "RESUMEN",
+            "NOMBRE / RAZÓN SOCIAL",
+            "FUNDAMENTACIÓN",
+            "DOCUMENTOS",
+            "FECHA",
+            "ESTADO"
+        ]
+    
+        
+        linea_encabezados = separador.join([encabezados[i].ljust(anchos[i]) for i in range(len(encabezados))])
+        print(linea_encabezados)
+        print("-" * len(linea_encabezados))
         for t in tramites:
-            print(f"Código: {t[0]} | Datos: {t}")
+            if len(t) == 20:
+                datos = [
+                    ajustar_texto(t[0], anchos[0]),
+                    ajustar_texto(t[1], anchos[1]),
+                    ajustar_texto(t[4], anchos[2]),
+                    ajustar_texto(t[16], anchos[3]),
+                    ajustar_texto(t[17], anchos[4]),
+                    ajustar_texto(t[18], anchos[5]),
+                    ajustar_texto(t[19], anchos[6])
+                ]
+                print(separador.join(datos))
+            elif len(t) == 22:
+                nombre_completo = f"{t[4]} {t[5]} {t[6]}"
+                datos = [
+                    ajustar_texto(t[0], anchos[0]),
+                    ajustar_texto(t[1], anchos[1]),
+                    ajustar_texto(nombre_completo, anchos[2]),
+                    ajustar_texto(t[18], anchos[3]),
+                    ajustar_texto(t[19], anchos[4]),
+                    ajustar_texto(t[20], anchos[5]),
+                    ajustar_texto(t[21], anchos[6])
+                ]
+                print(separador.join(datos))
 
-        print("=" * 50)
+        print("=" * 146)
 
 
 def ordenar_tramites_por_codigo():
@@ -59,7 +104,6 @@ def ordenar_tramites_por_codigo():
     print("1. Ascendente (Menor a Mayor)")
     print("2. Descendente (Mayor a Menor)")
 
-    # Validar la opción ingresada
     while True:
         opcion_ord = input("Seleccione una opción (1-2): ").strip()
 
@@ -87,46 +131,57 @@ def ordenar_tramites_por_codigo():
                     tramites[j] = tramites[j + 1]
                     tramites[j + 1] = temporal
 
-   
-    
-    print("\n" + "=" * 120)
+    print("\n" + "=" * 146)
 
     if opcion_ord == "2":
         print("TRÁMITES ORDENADOS DESCENDENTEMENTE")
     else:
         print("TRÁMITES ORDENADOS ASCENDENTEMENTE")
 
-    print("=" * 120)
+    print("=" * 146)
 
     separador = "  |  "
+    anchos = [10, 15, 31, 25, 15, 10, 10]
 
     encabezados = [
         "CÓDIGO",
         "RESUMEN",
-        "NOMBRE COMPLETO",
+        "NOMBRE / RAZÓN SOCIAL",
         "FUNDAMENTACIÓN",
         "DOCUMENTOS",
         "FECHA",
         "ESTADO"
     ]
 
-    print(separador.join(encabezados))
-    print("-" * 120)
+    linea_encabezados = separador.join([encabezados[i].ljust(anchos[i]) for i in range(len(encabezados))])
+    print(linea_encabezados)
+    print("-" * len(linea_encabezados))
 
     for t in tramites:
-        if len(t) >= 7:
+        if len(t) == 20:
             datos = [
-                t[0],
-                t[1],
-                t[2],
-                t[3],
-                t[4],
-                t[5],
-                t[6]
+                ajustar_texto(t[0], anchos[0]),
+                ajustar_texto(t[1], anchos[1]),
+                ajustar_texto(t[4], anchos[2]),
+                ajustar_texto(t[16], anchos[3]),
+                ajustar_texto(t[17], anchos[4]),
+                ajustar_texto(t[18], anchos[5]),
+                ajustar_texto(t[19], anchos[6])
             ]
-
+            print(separador.join(datos))
+        elif len(t) == 22:
+            nombre_completo = f"{t[4]} {t[5]} {t[6]}"
+            datos = [
+                ajustar_texto(t[0], anchos[0]),
+                ajustar_texto(t[1], anchos[1]),
+                ajustar_texto(nombre_completo, anchos[2]),
+                ajustar_texto(t[18], anchos[3]),
+                ajustar_texto(t[19], anchos[4]),
+                ajustar_texto(t[20], anchos[5]),
+                ajustar_texto(t[21], anchos[6])
+            ]
             print(separador.join(datos))
         else:
             print(f"Registro incompleto: {t}")
 
-    print("=" * 120)
+    print("=" * 146)

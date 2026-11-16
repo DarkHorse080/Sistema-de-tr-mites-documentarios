@@ -276,7 +276,7 @@ def ordenar_tramites_por_estado():
     orden_estados = {
         "Enviado": 1,
         "En proceso": 2,
-        "Incompleto": 3
+        "Completado": 3
     }
 
     n = len(tramites)
@@ -335,5 +335,24 @@ def ordenar_tramites_por_estado():
 
     print("=" * 146)
 
-
+def ordenar():
+      print("\n--- Opciones de Ordenamiento ---")
+      print("1. Ordenar por Código")
+      print("2. Ordenar por Fecha")
+      print("3. Ordenar por Estado")
+   
+      while True:
+         opcion = input("Seleccione una opción (1-3): ").strip()
+   
+         if opcion == "1":
+               ordenar_tramites_por_codigo()
+               break
+         elif opcion == "2":
+               ordenar_tramites_por_fecha()
+               break
+         elif opcion == "3":
+               ordenar_tramites_por_estado()
+               break
+         else:
+               print("Opción inválida. Ingrese un número entre 1 y 3.")
 

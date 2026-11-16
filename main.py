@@ -4,6 +4,7 @@ from Registro_tramite import Registrar_Tramite
 from Operaciones import mostrar_todos_los_tramites, ordenar_tramites_por_codigo
 from reportes import generar_reporte
 from cambio_estado import cambiar_estado
+from exportacion import exportar_csv
 def mostrar_menu():
     print("\n" + "="*45)
     print("  MESA DE PARTES DIGITAL - I.E. 1.4.8")
@@ -14,13 +15,14 @@ def mostrar_menu():
     print("4. Mostrar todos los expedientes")
     print("5. Generar reporte de solicitantes")
     print("6. Cambiar estado del trámite")
-    print("7. Salir")
+    print("7. Exportar a CSV")
+    print("8. Salir")
     print("="*45)
 
 def main():
     while True:
         mostrar_menu()
-        opcion = input("Seleccione una opción (1-7): ").strip()
+        opcion = input("Seleccione una opción (1-8): ").strip()
 
         match opcion:
             case "1":
@@ -42,9 +44,12 @@ def main():
                 print("\n[Módulo de Cambio de Estado]")
                 cambiar_estado()
             case "7":
+                print("\n[Módulo de Exportación a CSV]")
+                exportar_csv()
+            case "8":
                 print("\n¡Saliendo del sistema Mesa de Partes Digital!")
                 break
             case _:
-                print("\nOpción no válida. Ingrese un número entre 1 y 6.")
+                print("\nOpción no válida. Ingrese un número entre 1 y 8.")
 
 main()

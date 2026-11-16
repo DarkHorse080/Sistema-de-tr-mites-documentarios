@@ -13,6 +13,7 @@ def mostrar_tramite(datos):
 
     elif len(datos) == 20:
         print("Razon social:", datos[4])
+        print("RUC:", datos[5])
         inicio = 8
 
     else:
@@ -70,6 +71,31 @@ def consultar_por_dni(lineas):
         print("\nTotal de tramites encontrados:", encontrados)
 
 
+def consultar_por_ruc(lineas):
+    ruc = input("Ingrese el RUC: ").strip()
+
+    if len(ruc) != 11 or not ruc.isdigit():
+        print("El RUC debe tener 11 digitos.")
+        return
+
+    encontrados = 0
+
+    for linea in lineas:
+        if not linea.strip():
+            continue
+
+        datos = linea.strip().split(";")
+
+        if len(datos) == 20 and datos[3].strip().lower() == "juridica" and datos[5].strip() == ruc:
+            mostrar_tramite(datos)
+            encontrados += 1
+
+    if encontrados == 0:
+        print("No se encontraron tramites para ese RUC.")
+    else:
+        print("\nTotal de tramites encontrados:", encontrados)
+
+
 def consultar_tramite():
     carpeta = Path(__file__).resolve().parent
     ruta = carpeta / "Trámites.txt"
@@ -87,6 +113,7 @@ def consultar_tramite():
     print("\n--- CONSULTA DE TRAMITES ---")
     print("1. Consultar por codigo")
     print("2. Consultar por DNI")
+    print("3. Consultar por RUC")
 
     opcion = input("Seleccione una opcion: ").strip()
 
@@ -95,6 +122,9 @@ def consultar_tramite():
 
     elif opcion == "2":
         consultar_por_dni(lineas)
+
+    elif opcion == "3":
+        consultar_por_ruc(lineas)
 
     else:
         print("Opcion no valida.")

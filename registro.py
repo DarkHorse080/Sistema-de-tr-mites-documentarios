@@ -1,5 +1,5 @@
-from Formulario_Trámite import Mostrar_trámite
-from Operaciones import convertir_a_lista,convertir_a_texto
+from formulario_trámite import Mostrar_trámite
+from operaciones import convertir_a_lista,convertir_a_texto
 from pathlib import Path
 
 def Registrar_Tramite(tramite):

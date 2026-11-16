@@ -1,7 +1,7 @@
 from consulta import consultar_tramite
-from Formulario_Trámite import Formulario_Unico_de_Trámite
-from Registro_tramite import Registrar_Tramite
-from Operaciones import mostrar_todos_los_tramites, ordenar
+from formulario_trámite import Formulario_Unico_de_Trámite
+from registro import Registrar_Tramite
+from operaciones import mostrar_todos_los_tramites, ordenar
 from reportes import generar_reporte
 from cambio_estado import cambiar_estado
 from exportacion import exportar_csv

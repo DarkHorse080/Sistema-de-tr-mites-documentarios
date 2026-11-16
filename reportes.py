@@ -1,4 +1,4 @@
-from Operaciones import obtener_todos_los_tramites
+from operaciones import obtener_todos_los_tramites
 
 def generar_reporte():
     tramites = obtener_todos_los_tramites()

@@ -1,12 +1,12 @@
-from Formulario_Trámite import Mostrar_trámite
-from Operaciones import convertir_a_lista,convertir_a_texto
+from formulario_trámite import Mostrar_trámite
+from operaciones import convertir_a_lista,convertir_a_texto
 from pathlib import Path
 
 def Registrar_Tramite(tramite):
     tramite_completo=[]
     posicion=0
-    ruta = Path("Trámites.txt")
-    codigo=None
+    carpeta = Path(__file__).resolve().parent
+    ruta = carpeta / "Trámites.txt"
     if not ruta.exists():
         with open(ruta, "w", encoding="utf-8") as tramites:
             pass

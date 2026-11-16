@@ -1,10 +1,8 @@
-from Operaciones import obtener_todos_los_tramites
-from consulta import consultar_por_codigo
-from Operaciones import convertir_a_lista, convertir_a_texto
+from operaciones import convertir_a_lista, convertir_a_texto
 from pathlib import Path
 def cambiar_estado():
-    ruta = Path("Trámites.txt")
-
+    carpeta = Path(__file__).resolve().parent
+    ruta = carpeta / "Trámites.txt"
     if not ruta.exists():
         print("No hay tramites registrados.")
         return

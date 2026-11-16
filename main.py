@@ -1,18 +1,19 @@
 from consulta import consultar_tramite
-from Formulario_Trámite import Formulario_Unico_de_Trámite
-from Registro_tramite import Registrar_Tramite
-from Operaciones import mostrar_todos_los_tramites, ordenar
+from formulario_trámite import Formulario_Unico_de_Trámite
+from registro import Registrar_Tramite
+from operaciones import mostrar_todos_los_tramites
 from reportes import generar_reporte
 from cambio_estado import cambiar_estado
 from exportacion import exportar_csv
+from ordenamiento import ordenar
 def mostrar_menu():
     print("\n" + "="*45)
     print("  MESA DE PARTES DIGITAL - I.E. 1.4.8")
     print("="*45)
-    print("1. Registrar nuevo expediente")
-    print("2. Consultar expediente (DNI / Código)")
-    print("3. Ordenar expedientes")
-    print("4. Mostrar todos los expedientes")
+    print("1. Registrar nuevo trámite")
+    print("2. Consultar trámite (Código / DNI / RUC)")
+    print("3. Ordenar trámites")
+    print("4. Mostrar todos los trámites")
     print("5. Generar reporte de solicitantes")
     print("6. Cambiar estado del trámite")
     print("7. Exportar a CSV")
@@ -52,4 +53,5 @@ def main():
             case _:
                 print("\nOpción no válida. Ingrese un número entre 1 y 8.")
 
-main()
+if __name__ == "__main__":
+    main()

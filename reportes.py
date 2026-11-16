@@ -1,4 +1,4 @@
-from Operaciones import obtener_todos_los_tramites
+from operaciones import obtener_todos_los_tramites
 
 def generar_reporte():
     tramites = obtener_todos_los_tramites()
@@ -11,8 +11,8 @@ def generar_reporte():
     juridica_cont = 0
 
     for t in tramites:
-        texto = " ".join(t).upper()
-        if "NATURAL" in texto:
+        tipo_persona = str(t[3]).strip().upper()
+        if tipo_persona == "NATURAL":
             natural_cont += 1
         else:
             juridica_cont += 1

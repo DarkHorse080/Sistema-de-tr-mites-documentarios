@@ -102,8 +102,6 @@ def consultar_tramite():
 
     if not ruta.exists():
         ruta = carpeta / "Tramites.txt"
-
-    if not ruta.exists():
         print("No hay tramites registrados.")
         return
 

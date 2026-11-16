@@ -5,8 +5,8 @@ from pathlib import Path
 def Registrar_Tramite(tramite):
     tramite_completo=[]
     posicion=0
-    ruta = Path("Trámites.txt")
-    codigo=None
+    carpeta = Path(__file__).resolve().parent
+    ruta = carpeta / "Trámites.txt"
     if not ruta.exists():
         with open(ruta, "w", encoding="utf-8") as tramites:
             pass

@@ -10,8 +10,8 @@ def convertir_a_lista(texto):
 
 
 def obtener_todos_los_tramites():
-    ruta = Path("Trámites.txt")
-
+    carpeta = Path(__file__).resolve().parent
+    ruta = carpeta / "Trámites.txt"
     if not ruta.exists():
         return []
 

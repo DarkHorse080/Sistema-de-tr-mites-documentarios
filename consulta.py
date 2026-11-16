@@ -2,10 +2,75 @@
 from pathlib import Path
 
 
-def consultar_tramite():
-    print("\n--- CONSULTA DE TRAMITES ---")
+def mostrar_tramite(datos):
+    print("\n--- TRAMITE ENCONTRADO ---")
+    print("Codigo:", datos[0])
+    print("Resumen:", datos[1])
+
+    if len(datos) == 22:
+        print("Nombre completo:", datos[6], datos[4], datos[5])
+        inicio = 10
+
+    elif len(datos) == 20:
+        print("Razon social:", datos[4])
+        inicio = 8
+
+    else:
+        print("No se reconoce el formato del tramite.")
+        return
+
+    if len(datos) <= inicio + 11:
+        print("Los datos del tramite estan incompletos.")
+        return
+
+    print("Fundamentacion:", datos[inicio + 8])
+    print("Documentos adjuntos:", datos[inicio + 9])
+    print("Fecha:", datos[inicio + 10])
+    print("Estado:", datos[inicio + 11])
+
+
+def consultar_por_codigo(lineas):
     codigo = input("Ingrese el codigo del tramite: ").strip()
 
+    for linea in lineas:
+        if not linea.strip():
+            continue
+
+        datos = linea.strip().split(";")
+
+        if datos[0].strip() == codigo:
+            mostrar_tramite(datos)
+            return
+
+    print("No se encontro el tramite.")
+
+
+def consultar_por_dni(lineas):
+    dni = input("Ingrese el DNI: ").strip()
+
+    if len(dni) != 8 or not dni.isdigit():
+        print("El DNI debe tener 8 digitos.")
+        return
+
+    encontrados = 0
+
+    for linea in lineas:
+        if not linea.strip():
+            continue
+
+        datos = linea.strip().split(";")
+
+        if len(datos) == 22 and datos[7].strip() == dni:
+            mostrar_tramite(datos)
+            encontrados += 1
+
+    if encontrados == 0:
+        print("No se encontraron tramites para ese DNI.")
+    else:
+        print("\nTotal de tramites encontrados:", encontrados)
+
+
+def consultar_tramite():
     carpeta = Path(__file__).resolve().parent
     ruta = carpeta / "Trámites.txt"
 
@@ -19,37 +84,17 @@ def consultar_tramite():
     with open(ruta, "r", encoding="utf-8-sig") as archivo:
         lineas = archivo.readlines()
 
-    for linea in lineas:
-        if not linea.strip():
-            continue
+    print("\n--- CONSULTA DE TRAMITES ---")
+    print("1. Consultar por codigo")
+    print("2. Consultar por DNI")
 
-        datos = linea.strip().split(";")
+    opcion = input("Seleccione una opcion: ").strip()
 
-        if datos[0].strip() == codigo:
-            print("\n--- TRAMITE ENCONTRADO ---")
-            print("Codigo:", datos[0])
-            print("Resumen:", datos[1])
+    if opcion == "1":
+        consultar_por_codigo(lineas)
 
-            if len(datos) == 22:
-                print("Nombre completo:", datos[6], datos[4], datos[5])
-                inicio = 10
+    elif opcion == "2":
+        consultar_por_dni(lineas)
 
-            elif len(datos) == 20:
-                print("Razon social:", datos[4])
-                inicio = 8
-
-            else:
-                print("No se reconoce el formato del tramite.")
-                return
-
-            if len(datos) <= inicio + 11:
-                print("Los datos del tramite estan incompletos.")
-                return
-
-            print("Fundamentacion:", datos[inicio + 8])
-            print("Documentos adjuntos:", datos[inicio + 9])
-            print("Fecha:", datos[inicio + 10])
-            print("Estado:", datos[inicio + 11])
-            return
-
-    print("No se encontro el tramite.")
+    else:
+        print("Opcion no valida.")

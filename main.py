@@ -3,6 +3,7 @@ from Formulario_Trámite import Formulario_Unico_de_Trámite
 from Registro_tramite import Registrar_Tramite
 from Operaciones import mostrar_todos_los_tramites, ordenar_tramites_por_codigo
 from reportes import generar_reporte
+from cambio_estado import cambiar_estado
 def mostrar_menu():
     print("\n" + "="*45)
     print("  MESA DE PARTES DIGITAL - I.E. 1.4.8")
@@ -12,13 +13,14 @@ def mostrar_menu():
     print("3. Ordenar expedientes")
     print("4. Mostrar todos los expedientes")
     print("5. Generar reporte de solicitantes")
-    print("6. Salir")
+    print("6. Cambiar estado del trámite")
+    print("7. Salir")
     print("="*45)
 
 def main():
     while True:
         mostrar_menu()
-        opcion = input("Seleccione una opción (1-6): ").strip()
+        opcion = input("Seleccione una opción (1-7): ").strip()
 
         match opcion:
             case "1":
@@ -37,6 +39,9 @@ def main():
                 print("\n[Módulo de Reportes]")
                 generar_reporte()
             case "6":
+                print("\n[Módulo de Cambio de Estado]")
+                cambiar_estado()
+            case "7":
                 print("\n¡Saliendo del sistema Mesa de Partes Digital!")
                 break
             case _:

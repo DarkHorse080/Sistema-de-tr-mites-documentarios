@@ -1,7 +1,7 @@
 from consulta import consultar_tramite
 from Formulario_Trámite import Formulario_Unico_de_Trámite
 from Registro_tramite import Registrar_Tramite
-from Operaciones import mostrar_todos_los_tramites, ordenar_tramites_por_codigo
+from Operaciones import mostrar_todos_los_tramites, ordenar
 from reportes import generar_reporte
 from cambio_estado import cambiar_estado
 from exportacion import exportar_csv
@@ -33,7 +33,7 @@ def main():
                 consultar_tramite()
             case "3":
                 print("\n[Módulo de Ordenamiento]")
-                ordenar_tramites_por_codigo()
+                ordenar()
             case "4":
                 print("\n[Módulo de Listado]")
                 mostrar_todos_los_tramites()

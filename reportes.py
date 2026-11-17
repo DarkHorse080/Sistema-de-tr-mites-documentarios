@@ -1,6 +1,12 @@
 from operaciones import obtener_todos_los_tramites
 
 def generar_reporte():
+    """
+    Propósito: Obtiene y muestra el conteo total de trámites de Persona Natural y Jurídica.
+    Parámetros: Ninguno.
+    Retorna: Imprime el conteo detallado en consola.
+    Condiciones: Si no hay trámites registrados, muestra una advertencia y finaliza.
+    """
     tramites = obtener_todos_los_tramites()
     
     if len(tramites) == 0:

@@ -1,5 +1,17 @@
 from operaciones import obtener_todos_los_tramites,mostrar_tramites
+"""
+Módulo de ordenamiento de trámites.
+Permite ordenar los trámites registrados por código, fecha o estado
+utilizando el algoritmo de ordenamiento burbuja.
+"""
+
 def ordenar_tramites_por_codigo():
+    """
+Ordena los trámites por su código (TR-001, TR-002, etc.).
+Extrae el número del código (posición [5:] del string) y lo convierte
+a entero para poder comparar. Permite elegir orden ascendente o
+descendente. Usa el algoritmo burbuja (doble ciclo for).
+"""
     tramites = obtener_todos_los_tramites()
 
     if len(tramites) == 0:
@@ -51,6 +63,13 @@ def ordenar_tramites_por_codigo():
     print("=" * 146)
 
 def ordenar_tramites_por_fecha():
+    """
+Ordena los trámites por fecha de registro (formato dd/mm/yyyy).
+
+La fecha está en la penúltima posición de cada lista (-2).
+Separa día, mes y año para comparar primero por año, luego mes
+y finalmente día. El orden resultante es de más antigua a más reciente.
+"""
     tramites = obtener_todos_los_tramites()
 
     if len(tramites) == 0:
@@ -99,6 +118,12 @@ def ordenar_tramites_por_fecha():
 
 
 def ordenar_tramites_por_estado():
+    """
+Ordena los trámites según su estado actual.
+Se define un orden lógico de prioridad:
+1 = Enviado, 2 = En proceso, 3 = Completado
+El estado está en la última posición de cada lista (-1).
+"""
     tramites = obtener_todos_los_tramites()
     if len(tramites) == 0:
         print("\nNo hay trámites registrados para ordenar.")
@@ -134,6 +159,11 @@ def ordenar_tramites_por_estado():
     print("=" * 146)
 
 def ordenar():
+      """
+Menú principal del módulo de ordenamiento.
+Muestra las opciones disponibles (código, fecha o estado)
+y llama a la función correspondiente según la elección del usuario.
+"""
       print("\n--- Opciones de Ordenamiento ---")
       print("1. Ordenar por Código")
       print("2. Ordenar por Fecha")

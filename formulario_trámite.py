@@ -1,6 +1,22 @@
 import datetime
 import re
+
 def Resumen_del_pedido():
+    """Solicita y valida el resumen del pedido ingresado por el usuario.
+
+    Propósito:
+        Permite ingresar el resumen del pedido asegurando que el campo no se encuentre vacío.
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        Texto con el resumen del pedido ingresado.
+
+    Condiciones:
+        Si el usuario no escribe nada, muestra un mensaje de 
+        error y vuelve a solicitar el ingreso del resumen.
+    """
     while True:
         print("\nI. RESUMEN DE SU PEDIDO")
         resumen_pedido=input()
@@ -12,7 +28,20 @@ def Resumen_del_pedido():
         
 
 def Autoridad_a_la_que_se_dirige():
-    
+    """Solicita y valida la autoridad a la que se dirige el trámite.
+
+    Propósito:
+        Captura el nombre de la autoridad asegurando que el campo no esté vacío.
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        Nombre de la autoridad ingresada.
+
+    Condiciones:
+        Si el campo está vacío, muestra un mensaje de error y repite el proceso de entrada.
+    """
     while True:
         print("\nII. DEPENDENCIA O AUTORIDAD A LA QUE SE DIRIGE")
         autoridad=input()
@@ -20,7 +49,25 @@ def Autoridad_a_la_que_se_dirige():
             print("El campo no puede estar vacío")
             continue
         return autoridad
+
 def Datos_del_solicitante():
+    """Recolecta y valida los datos personales o jurídicos del solicitante.
+
+    Propósito:
+        Gestiona el registro de persona natural (apellidos, nombres, DNI) o jurídica 
+        (razón social, RUC), junto con correo, teléfono y validaciones de formato.
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        Los datos del solicitante en una lista ordenada según corresponda a persona Natural o Jurídica.
+
+    Condiciones:
+        Verifica que los campos obligatorios no estén vacíos.
+        Valida que el DNI tenga 8 dígitos numéricos y el RUC 11 dígitos numéricos.
+        Valida que el teléfono tenga 9 dígitos y el correo cumpla con el formato estándar.
+    """
     print("\nIII. DATOS DEL SOLICITANTE")
     while True:
         print("\nTipo de persona")
@@ -73,9 +120,24 @@ def Datos_del_solicitante():
         elif persona == "Juridica":
             return [persona, razon_social, documento, correo, telefono]
         
-        
 
 def Direccion():
+    """Registra y valida la dirección del solicitante.
+
+    Propósito:
+        Permite seleccionar el tipo de vía y de zona mediante opciones numéricas, y solicita los datos de ubicación.
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        Lista con los datos estructurados de la dirección 
+        [tipo_via, nombre_via, tipo_zona, nombre_zona, referencia, departamento, provincia, distrito].
+
+    Condiciones:
+        Valida que las opciones seleccionadas para vía y zona sean válidas.
+        Asegura que ninguno de los campos de texto obligatorios quede vacío.
+    """
     print("\nIV. DIRECCIÓN")
     while True:
 
@@ -171,6 +233,20 @@ def Direccion():
         return [tipo_via, nombre_via, tipo_zona, nombre_zona, referencia, departamento, provincia, distrito]
 
 def Fundamentación_del_pedido():
+    """Captura los fundamentos en los que se basa el trámite.
+
+    Propósito:
+        Solicita al usuario la justificación del pedido, evitando entradas vacías.
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        Texto con la fundamentación del pedido.
+
+    Condiciones:
+        Si el campo está vacío, muestra un mensaje de error y reintenta.
+    """
     while True:
         print("\nV. FUNDAMENTACIÓN DEL PEDIDO")
         fundamentacion=input()
@@ -182,6 +258,20 @@ def Fundamentación_del_pedido():
         return fundamentacion
 
 def Documentos_adjuntados():
+    """Registra los documentos que acompañan al formulario.
+
+    Propósito:
+        Permite detallar los archivos o anexos adjuntos al trámite.
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        Descripción de los documentos adjuntados.
+
+    Condiciones:
+        Valida que el campo no quede vacío.
+    """
     while True:
         print("\nVI. DOCUMENTOS QUE SE ADJUNTAN")
         documentos_adjuntados=input()
@@ -192,11 +282,46 @@ def Documentos_adjuntados():
         return documentos_adjuntados
 
 def Fecha():
+    """Obtiene la fecha actual del sistema.
+
+    Propósito:
+        Genera una cadena de texto con la fecha actual formateada como día/mes/año.
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        Fecha actual en formato "DD/MM/YYYY".
+
+    Condiciones:
+        Ninguna.
+    """
     fecha=datetime.datetime.now().strftime("%d/%m/%Y")
     return fecha
 
 
 def Mostrar_trámite(codigo,resumen_pedido,autoridad,datos_personales,datos_direccion,fundamentacion_pedido,documentos_adjuntados,fecha):
+    """Muestra en consola la información completa registrada en el trámite.
+
+    Propósito:
+        Imprime todas las secciones del Formulario Único de Trámite (FUT), adaptando la visualización de los datos según sea persona natural o jurídica.
+
+    Parámetros:
+        codigo (str): Código identificador único del trámite.
+        resumen_pedido (str): Resumen del pedido.
+        autoridad (str): Autoridad o dependencia destinataria.
+        datos_personales (list): Datos del solicitante (natural o jurídica).
+        datos_direccion (list): Datos de ubicación y dirección.
+        fundamentacion_pedido (str): Fundamentación o sustento.
+        documentos_adjuntados (str): Relación de documentos anexos.
+        fecha (str): Fecha de registro del trámite.
+
+    Retorna:
+        Nada.
+
+    Condiciones:
+        Verifica la longitud de la lista `datos_personales` para mostrar los campos específicos de Persona Natural (7 elementos) o Persona Jurídica (5 elementos).
+    """
     print("------DATOS REGISTRADOS DEL TRÁMITE------")
     print(f"\nCodigo:{codigo}")
     print("\nI. RESUMEN DE SU PEDIDO")
@@ -210,7 +335,7 @@ def Mostrar_trámite(codigo,resumen_pedido,autoridad,datos_personales,datos_dire
         print("Tipo de persona :", datos_personales[0])
         print("Apellido paterno:", datos_personales[1])
         print("Apellido materno:", datos_personales[2])
-        print("Nombres         :", datos_personales[3])
+        print("Nombres        :", datos_personales[3])
         print("Documento       :", datos_personales[4])
         print("Correo          :", datos_personales[5])
         print("Teléfono        :", datos_personales[6])
@@ -244,6 +369,20 @@ def Mostrar_trámite(codigo,resumen_pedido,autoridad,datos_personales,datos_dire
 
 
 def Formulario_Unico_de_Trámite():
+    """Maneja el flujo principal para el registro del Formulario Único de Trámite (FUT).
+
+    Propósito:
+        Ejecuta secuencialmente las funciones de captura de datos (resumen, autoridad, solicitante, dirección, fundamentación, documentos y fecha) para consolidarlas en una lista integral.
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        Lista consolidada con todos los componentes del trámite.
+
+    Condiciones:
+        Ninguna.
+    """
     print("------FORMULARIO ÚNICO DE TRÁMITE------")
     i=Resumen_del_pedido()
     ii=Autoridad_a_la_que_se_dirige()

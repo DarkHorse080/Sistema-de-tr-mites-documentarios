@@ -65,8 +65,7 @@ descendente. Usa el algoritmo burbuja (doble ciclo for).
 def ordenar_tramites_por_fecha():
     """
 Ordena los trámites por fecha de registro (formato dd/mm/yyyy).
-Sistema de Trámites Documentarios | Módulo de Ordenamiento
-Página 2
+
 La fecha está en la penúltima posición de cada lista (-2).
 Separa día, mes y año para comparar primero por año, luego mes
 y finalmente día. El orden resultante es de más antigua a más reciente.

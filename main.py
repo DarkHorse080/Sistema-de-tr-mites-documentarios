@@ -6,7 +6,18 @@ from reportes import generar_reporte
 from cambio_estado import cambiar_estado
 from exportacion import exportar_csv
 from ordenamiento import ordenar
+"""
+Módulo Principal:
+- Muestra el menú con 8 opciones usando match-case.
+- Conecta e integra todos los módulos desarrollados.
+"""
 def mostrar_menu():
+    """
+    Propósito: Imprime en pantalla las opciones del menú principal de la Mesa de Partes.
+    Parámetros: Ninguno.
+    Retorna: Muestra las opciones en la consola.
+    Condiciones: Ninguna.
+    """
     print("\n" + "="*45)
     print("  MESA DE PARTES DIGITAL - I.E. 1.4.8")
     print("="*45)
@@ -21,6 +32,13 @@ def mostrar_menu():
     print("="*45)
 
 def main():
+    """
+    Propósito: Ejecuta el bucle principal del sistema gestionando la opción elegida por el usuario.
+    Parámetros: Ninguno.
+    Retorna: No retorna valores, opera de forma interactiva en la consola.
+    Condiciones: Si el usuario selecciona '8', rompe el bucle y finaliza el programa; si ingresa una
+    opción inválida, muestra un mensaje de error.
+    """
     while True:
         mostrar_menu()
         opcion = input("Seleccione una opción (1-8): ").strip()

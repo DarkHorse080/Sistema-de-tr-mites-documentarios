@@ -1,6 +1,21 @@
 from operaciones import convertir_a_lista, convertir_a_texto
 from pathlib import Path
 def cambiar_estado():
+    """Modifica el estado de un trámite según su código.
+
+    Propósito:
+        Busca un trámite por su código en "Trámites.txt", permite elegir un nuevo estado (Enviado, En proceso o Completado), lo cambia y actualiza el archivo.
+
+    Parámetros:
+        Ninguno.
+
+    Retorna:
+        No devuelve ningún valor.
+
+    Condiciones:
+        Si el archivo no existe o está vacío finaliza.
+        Si el código no se encuentra, se permanece en el bucle y se muestra un mensaje de no encontrado.
+    """
     carpeta = Path(__file__).resolve().parent
     ruta = carpeta / "Trámites.txt"
     if not ruta.exists():

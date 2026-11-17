@@ -3,6 +3,23 @@ from operaciones import convertir_a_lista,convertir_a_texto
 from pathlib import Path
 
 def Registrar_Tramite(tramite):
+    """Registra un nuevo trámite en el archivo de texto y muestra su resumen en consola.
+
+    Propósito:
+        Genera un código único con el prefijo "TR-00" y estructura los datos 
+        del trámite junto con su estado inicial ("Enviado"), los almacena en "Trámites.txt" 
+        y finalmente invoca la función para mostrar el reporte en pantalla.
+
+    Parámetros:
+        tramite (list): Lista que contiene los componentes principales del formulario único de trámite (resumen, autoridad, solicitante, dirección, fundamentación, documentos y fecha).
+
+    Retorna:
+        Nada.
+
+    Condiciones:
+        Si el archivo "Trámites.txt" no existe, lo crea automáticamente.
+        Si ya existen registros previos, calcula el siguiente código incrementando el número del último código registrado.
+    """
     tramite_completo=[]
     posicion=0
     carpeta = Path(__file__).resolve().parent

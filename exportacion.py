@@ -1,31 +1,47 @@
 import csv
+from pathlib import Path
+from operaciones import obtener_todos_los_tramites
 
 def exportar_csv():
-    """Exporta los datos de los trámites almacenados en texto plano a un formato CSV.
-
-    Propósito:
-        Lee el archivo de texto "Trámites.txt" delimitado por punto y coma (";") y genera un nuevo archivo "Trámites.csv" compatible con hojas de cálculo.
-
-    Parámetros:
-        Ninguno.
-
-    Retorna:
-        Nada.
-
-    Condiciones:
-        Si el archivo "Trámites.txt" no existe, captura la excepción FileNotFoundError y muestra un mensaje indicando que no se encontró el archivo.
-    """
     try:
-        with open("Trámites.txt", "r", encoding="utf-8") as archivo_txt:
-            lector = csv.reader(archivo_txt, delimiter=";")
+        carpeta = Path(__file__).resolve().parent
 
-            with open("Trámites.csv", "w", newline="", encoding="utf-8") as archivo_csv:
-                escritor = csv.writer(archivo_csv)
+        # Obtener todos los trámites registrados
+        tramites = obtener_todos_los_tramites()
 
-                for fila in lector:
-                    escritor.writerow(fila)
+        # Separar personas naturales y jurídicas
+        personas_naturales = []
+        personas_juridicas = []
+        personas_naturales.append(["Código", "Resumen", "Autoridad", "Tipo de persona", "Apellido paterno", "Apellido materno", "Nombres", "Documento", "Correo", "Teléfono", "Tipo de vía", "Nombre de vía", "Tipo de zona", "Nombre de zona", "Referencia", "Departamento", "Provincia", "Distrito", "Fundamentación del pedido", "Documentos adjuntados", "Fecha", "Estado"])
+        personas_juridicas.append(["Código", "Resumen", "Autoridad", "Tipo de persona", "Razón social", "Documento", "Correo", "Teléfono", "Tipo de vía", "Nombre de vía", "Tipo de zona", "Nombre de zona", "Referencia", "Departamento", "Provincia", "Distrito", "Fundamentación del pedido", "Documentos adjuntados", "Fecha", "Estado"])   
+        for tramite in tramites:
+            if len(tramite) == 22:
+                personas_naturales.append(tramite)
 
-        print("¡Archivo CSV exportado correctamente!")
+            elif len(tramite) == 20:
+                personas_juridicas.append(tramite)
+
+        # Exportar personas naturales
+        ruta_naturales = carpeta / "Trámites personas naturales.csv"
+
+        with open(ruta_naturales, "w", newline="", encoding="utf-8-sig") as archivo:
+            escritor = csv.writer(archivo)
+            escritor.writerows(personas_naturales)
+
+        # Exportar personas jurídicas
+        ruta_juridicas = carpeta / "Trámites personas jurídicas.csv"
+
+        with open(ruta_juridicas, "w", newline="", encoding="utf-8-sig") as archivo:
+            escritor = csv.writer(archivo)
+            escritor.writerows(personas_juridicas)
+
+        print("\n¡Exportación realizada correctamente!")
+        print(f"Personas naturales: {len(personas_naturales)-1}")
+        print(f"Personas jurídicas: {len(personas_juridicas)-1}")
+        print("Se generaron dos archivos CSV (personas naturales y jurídicas).")
 
     except FileNotFoundError:
         print("No se encontró el archivo Trámites.txt")
+
+    except Exception as error:
+        print(f"Error al exportar los trámites: {error}")

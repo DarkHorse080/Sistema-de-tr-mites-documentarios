@@ -30,7 +30,7 @@ def cambiar_estado():
         return
     
     while True:
-        codigo = input("Código: ")
+        codigo = input("Código: ").strip()
         encontrado = False
         nuevas_lineas = []
         for linea in lineas:

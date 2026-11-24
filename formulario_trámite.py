@@ -19,7 +19,7 @@ def Resumen_del_pedido():
     """
     while True:
         print("\nI. RESUMEN DE SU PEDIDO")
-        resumen_pedido=input()
+        resumen_pedido=input().strip()
         if not resumen_pedido:
             print("El campo no puede estar vacío")
             continue
@@ -44,7 +44,7 @@ def Autoridad_a_la_que_se_dirige():
     """
     while True:
         print("\nII. DEPENDENCIA O AUTORIDAD A LA QUE SE DIRIGE")
-        autoridad=input()
+        autoridad=input().strip()
         if not autoridad:
             print("El campo no puede estar vacío")
             continue
@@ -249,7 +249,7 @@ def Fundamentación_del_pedido():
     """
     while True:
         print("\nV. FUNDAMENTACIÓN DEL PEDIDO")
-        fundamentacion=input()
+        fundamentacion=input().strip()
 
         if not fundamentacion:
             print("El campo no puede estar vacío")
@@ -274,7 +274,7 @@ def Documentos_adjuntados():
     """
     while True:
         print("\nVI. DOCUMENTOS QUE SE ADJUNTAN")
-        documentos_adjuntados=input()
+        documentos_adjuntados=input().strip()
         if not documentos_adjuntados:
             print("El campo no puede estar vacío")
             continue
